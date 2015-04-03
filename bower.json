@@ -1,0 +1,19 @@
+{
+  "name": "fontmin.github.io",
+  "private": true,
+  "version": "1.0.0",
+  "authors": [
+    "junmer <junmer@foxmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fullpage": "~2.6.2"
+  }
+}

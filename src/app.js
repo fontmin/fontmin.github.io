@@ -10,10 +10,13 @@ define(function (require) {
 
     var isMac = /Mac OS X/.test(navigator.userAgent);
 
+    /**
+     * 下载链接
+     */
     function setDownLoad() {
         if (isMac) {
-            $btn = $('.down-btn');
-            $link = $('.down-link');
+            var $btn = $('.down-btn');
+            var $link = $('.down-link');
 
             var btnUrl = $btn.attr('href');
 
@@ -27,15 +30,21 @@ define(function (require) {
         }
     }
 
+    /**
+     * 懒加载
+     */
     function lazySrc() {
-        $('[data-src]').each(function(){
-            $elem = $(this)
+        $('[data-src]').each(function () {
+            var $elem = $(this);
             $elem.attr('src', $elem.attr('data-src'));
         });
     }
 
-    function init () {
-        $(document).ready(function() {
+    /**
+     * 入口
+     */
+    function init() {
+        $(document).ready(function () {
 
             setDownLoad();
             lazySrc();
@@ -43,12 +52,12 @@ define(function (require) {
             $('#fullpage').fullpage({
                 sectionsColor: ['#3C5098'],
                 anchors: ['banner', 'feature', 'usage', 'terminal', 'app', 'source'],
-                afterRender: function() {
+                afterRender: function () {
                     $('#loading').addClass('load-end');
                     $('.banner').addClass('load-end');
                 },
-                onLeave: function(index) {
-                    if(index === 1) {
+                onLeave: function (index) {
+                    if (index === 1) {
                         $('.banner').removeClass('load-end');
                     }
                 }

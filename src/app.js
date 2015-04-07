@@ -6,6 +6,7 @@
 define(function (require) {
 
     var $ = require('jquery');
+    require('lettering');
     require('fullpage');
 
     var isMac = /Mac OS X/.test(navigator.userAgent);
@@ -40,12 +41,17 @@ define(function (require) {
         });
     }
 
+    function setFeatureAnim() {
+        $('.font-body p').lettering();
+    }
+
     /**
      * 入口
      */
     function init() {
         $(document).ready(function () {
 
+            setFeatureAnim();
             setDownLoad();
             lazySrc();
 

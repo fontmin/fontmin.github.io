@@ -1,28 +1,29 @@
 {
-    "name": "fontmin.github.io",
-    "version": "0.0.1",
-    "description": "edp project",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "edp": {
-        "wwwroot": "/",
-        "depDir": "dep",
-        "srcDir": "src",
-        "loaderAutoConfig": "js,htm,html,tpl,vm,phtml",
-        "loaderUrl": "http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js",
-        "dependencies": {},
-        "mobile": {
-            "theme": "spa"
-        }
-    },
-    "dependencies": {
-        "edp-provider-rider": "^0.4.5",
-        "rider-ui": "^0.1.2"
-    },
-    "author": "junmer",
-    "repository": "empty",
-    "license": "BSD",
-    "readme": "README.md"
+  "name": "fontmin.github.io",
+  "version": "0.0.1",
+  "description": "edp project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "edp": {
+    "wwwroot": "/",
+    "depDir": "dep",
+    "srcDir": "src",
+    "loaderAutoConfig": "js,htm,html,tpl,vm,phtml",
+    "loaderUrl": "http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js",
+    "dependencies": {},
+    "mobile": {
+      "theme": "spa"
+    }
+  },
+  "dependencies": {
+    "edp-build-fontmin": "^1.0.1",
+    "edp-provider-rider": "^0.4.5",
+    "rider-ui": "^0.1.2"
+  },
+  "author": "junmer",
+  "repository": "empty",
+  "license": "BSD",
+  "readme": "README.md"
 }

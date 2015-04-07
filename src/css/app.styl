@@ -6,9 +6,16 @@
 $-page-main-color = #3C5098
 $-page-fill-color = #E4CAA3
 
+$-base-font-family = SourceHanSanSC-Light, $-base-font-family
+
+font-face('SentyBrush', '../font/SentyBrush')
+font-face('SentyWEN1215', '../font/SentyWEN1215')
+font-face('SourceHanSanSC-Light', '../font/SourceHanSanSC-Light')
+
 html,
 body
     font-size: $-base-font-size
+    font-family: $-base-font-family
 
 h1,
 h2
@@ -93,9 +100,10 @@ h2
 
 .banner
     h1
-        color: $-page-fill-color
-    h2
         color: #fff
+        font-family: SentyBrush
+    h2
+        color: $-page-fill-color
 
     &.load-end,
     &.active
@@ -105,12 +113,22 @@ h2
 
 .menu
     a
-        color: $-page-fill-color
+        color: #fff
         margin-left: em(16)
         &:first-child
             margin-left: 0
         &:hover
-            color: rgba($-page-fill-color, 0.5)
+            color: $-page-fill-color
+
+em-char()
+    background: #E4CAA3
+    color: #000
+
+// em-chars
+em-chars($nums...)
+  for $num in $nums
+    .char{$num}
+        em-char()
 
 .feature
     clearfix()
@@ -122,12 +140,12 @@ h2
         width: $arrow-width
         height: $arrow-height
         margin-left: -($arrow-width / 2)
-        margin-top: -($arrow-height)
+        margin-top: -($arrow-height * 3 / 2)
         i
-            triangle right $arrow-height #888
+            triangle right ($arrow-height/2) #eee
             absolute: 0 10px 0 0
         em
-            triangle right $arrow-height #fff
+            triangle right ($arrow-height/2) #fff
             absolute: 0 0 0 -4px
 
     &.active
@@ -136,18 +154,34 @@ h2
         .arrow
             animate('slideInLeft', .5s)
 
+        .feature-left
+            .font-chars
+                span
+                    transition: background 0.5s ease-in 1s, color 0.5s ease-out 1s
+                    color: #ccc
+
+                em-chars(1, 2, 4, 5, 6, 8, 9)
+
         .arrow
-            animation-delay: .5s
+            animation-delay: 1.5s
 
         .feature-right
-            animation-delay: 1s
+            animation-delay: 2s
+
+            .font-chars
+                background: rgba(#D8D8D8, 0.2)
+                transition: background 0.5s ease-in 2.5s
+
+                span
+                    em-char()
+                    transition: background 0.5s ease-in 2.5s, color 0.5s ease-out 2.5s
 
         .font-info
-            animation-delay: 1.5s
+            animation-delay: 3s
             animate('slideInUp', .5s)
 
         .tags
-            animation-delay: 2s
+            animation-delay: 3.5s
             animate('slideInUp', .5s)
 
 
@@ -158,16 +192,34 @@ h2
 .feature-left
     float: left
 
+    .font-body
+        width: 300px
+        padding-left: 30px
+
+    .font-chars
+        padding: 0
+
 .feature-right
     float: right
 
 .font-body
     text-align: left
-    width: 260px
+    width: 330px
     margin: 0 auto
 
 .font-chars
     font-size: em(32)
+    height: 120px
+    padding: 0 15px
+    p
+        font-family: SentyWEN1215
+        margin: 0
+    span
+        line-height: 1
+        display: inline-block
+        height: 40px
+        vertical-align: middle
+        margin-right: 1px
 
 .font-meta
     color: #999999
@@ -183,10 +235,11 @@ h2
 
 .usage
     pre
-        text-align: left
         width: em(600)
         margin: 0 auto
         padding: em(16)
+        text-align: left
+        font-family: Consolas, Monaco, 'Andale Mono', monospace
         background: rgba($-page-fill-color, 0.3)
 
 .terminal
@@ -198,6 +251,8 @@ h2
     em
         background: rgba($-page-fill-color, 0.5)
         padding: em(2) em(4)
+
+
 
 .app
     img
@@ -212,7 +267,7 @@ h2
         color: #fff
 
 .github
-    margin: em(64) 0 0 0
+    margin: em(50) 0 em(16) 0
     font-size: em(30)
     display: block
 

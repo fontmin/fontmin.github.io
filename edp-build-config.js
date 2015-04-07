@@ -69,7 +69,11 @@ exports.exclude = [
 
 var FontProcessor = require('edp-build-fontmin');
 
-
+/**
+ * 并行处理器
+ *
+ * @param {Array} processors 处理器
+ */
 function ParallelProcessor(processors) {
 
     function getNames(pces) {
@@ -115,15 +119,26 @@ exports.getProcessors = function () {
     });
     var moduleProcessor = new ModuleCompiler();
     var jsProcessor = new JsCompressor();
-    var pathMapperProcessor = new PathMapper();
+
+    var replacements = new PathMapper().replacements;
+
+    var pathMapperProcessor = new PathMapper({
+        replacements: replacements.concat({
+            type: 'html',
+            tag: 'img',
+            attribute: 'srcset',
+            files: ['*.html']
+        })
+    });
 
     var stylusProcessor = new StylusCompiler({
-            files: ['src/css/app.styl'],
-            stylus: epr.stylus,
-            compileOptions: {
-                use: epr.stylusPlugin
-            }
-        });
+        files: ['src/css/app.styl'],
+        stylus: epr.stylus,
+        compileOptions: {
+            use: epr.stylusPlugin
+        }
+    });
+
     var addCopyright = new AddCopyright();
     var outputCleaner = new OutputCleaner();
 

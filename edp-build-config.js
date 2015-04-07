@@ -67,6 +67,43 @@ exports.exclude = [
     '*.swp'
 ];
 
+var FontProcessor = require('edp-build-fontmin');
+
+
+function ParallelProcessor(processors) {
+
+    function getNames(pces) {
+        var names = [];
+        pces.forEach(function(pce){
+            names.push(pce.name);
+        });
+        return names.join(', ');
+    }
+
+    return {
+        name: getNames(processors),
+        start: function(processContext, done) {
+
+            var me = this;
+            var BaseProcessor = me.constructor;
+            var processLen = processors.length;
+
+            processors.forEach(function(processor, index) {
+                if ( !(processor instanceof BaseProcessor) ) {
+                    processor = new BaseProcessor( processor );
+                }
+                processor.start( processContext, processFinish );
+            });
+
+            function processFinish() {
+                if (--processLen === 0) {
+                    done();
+                }
+            }
+        }
+    };
+}
+
 /**
  * 获取构建processors的方法
  *
@@ -90,15 +127,43 @@ exports.getProcessors = function () {
     var addCopyright = new AddCopyright();
     var outputCleaner = new OutputCleaner();
 
+    var baseFontProcessor = new FontProcessor({
+        name: 'BaseFontProcessor',
+        entryFiles: [ 'index.html' ],
+        files: [ 'SourceHanSansSC-Light.ttf' ]
+    });
+
+    var logoFontProcessor = new FontProcessor({
+        name: 'LogoFontProcessor',
+        entryFiles: [],
+        files: [ 'SentyBrush.ttf' ],
+        text: 'Fontmin'
+    });
+
+    var daoFontProcessor = new FontProcessor({
+        name: 'DaoFontProcessor',
+        entryFiles: [],
+        files: [ 'SentyWEN1215.ttf' ],
+        text: '道可道，非常道。名可名，非常名。'
+    });
+
     return [
         stylusProcessor,
         cssProcessor,
         moduleProcessor,
         jsProcessor,
         pathMapperProcessor,
-        addCopyright,
-        outputCleaner
+        new ParallelProcessor([
+            addCopyright,
+            outputCleaner
+        ]),
+        new ParallelProcessor([
+            baseFontProcessor,
+            logoFontProcessor,
+            daoFontProcessor
+        ])
     ];
+
 };
 
 exports.moduleEntries = 'html,htm,phtml,tpl,vm,js';

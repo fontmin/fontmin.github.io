@@ -42,7 +42,7 @@ define(function (require) {
     }
 
     function setFeatureAnim() {
-        $('.font-body p').lettering();
+        $('.font-chars p').lettering();
     }
 
     /**

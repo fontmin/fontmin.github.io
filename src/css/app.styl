@@ -150,28 +150,26 @@ em-chars($nums...)
 
     &.active
         .feature-left,
-        .feature-right,
-        .arrow
-            animate('slideInLeft', .5s)
+        .feature-right
+            animate('slideInDown', .5s)
 
         .feature-left
             .font-chars
                 span
                     transition: background 0.5s ease-in 1s, color 0.5s ease-out 1s
                     color: #ccc
-
                 em-chars(1, 2, 4, 5, 6, 8, 9)
 
         .arrow
             animation-delay: 1.5s
+            animate('slideInLeft', .5s)
 
         .feature-right
             animation-delay: 2s
 
             .font-chars
                 background: rgba(#D8D8D8, 0.2)
-                transition: background 0.5s ease-in 2.5s
-
+                // transition: background 0.5s ease-in 2.5s
                 span
                     em-char()
                     transition: background 0.5s ease-in 2.5s, color 0.5s ease-out 2.5s

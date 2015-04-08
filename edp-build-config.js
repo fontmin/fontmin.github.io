@@ -68,45 +68,7 @@ exports.exclude = [
 ];
 
 var FontProcessor = require('edp-build-fontmin');
-
-/**
- * 并行处理器
- *
- * @param {Array} processors 处理器
- */
-function ParallelProcessor(processors) {
-
-    function getNames(pces) {
-        var names = [];
-        pces.forEach(function(pce){
-            names.push(pce.name);
-        });
-        return names.join(', ');
-    }
-
-    return {
-        name: getNames(processors),
-        start: function(processContext, done) {
-
-            var me = this;
-            var BaseProcessor = me.constructor;
-            var processLen = processors.length;
-
-            processors.forEach(function(processor, index) {
-                if ( !(processor instanceof BaseProcessor) ) {
-                    processor = new BaseProcessor( processor );
-                }
-                processor.start( processContext, processFinish );
-            });
-
-            function processFinish() {
-                if (--processLen === 0) {
-                    done();
-                }
-            }
-        }
-    };
-}
+var ParallelProcessor = require('edp-build-parallel');
 
 /**
  * 获取构建processors的方法

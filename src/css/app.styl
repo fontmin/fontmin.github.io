@@ -124,11 +124,16 @@ em-char()
     background: #E4CAA3
     color: #000
 
+em-char-delay($delay, $i)
+    transition-delay: .1s * $i + $delay
+
 // em-chars
-em-chars($nums...)
-  for $num in $nums
-    .char{$num}
+em-chars($delay, $nums...)
+  for $num, $i in $nums
+    span.char{$num}
         em-char()
+        transition: all 0.5s ease
+        em-char-delay($delay, $i)
 
 .feature
     clearfix()
@@ -141,8 +146,9 @@ em-chars($nums...)
         height: $arrow-height
         margin-left: -($arrow-width / 2)
         margin-top: -($arrow-height * 3 / 2)
+
         i
-            triangle right ($arrow-height/2) #eee
+            triangle right ($arrow-height/2) #ccc
             absolute: 0 10px 0 0
         em
             triangle right ($arrow-height/2) #fff
@@ -151,37 +157,38 @@ em-chars($nums...)
     &.active
         .feature-left,
         .feature-right
-            animate('slideInDown', .5s)
+            animate('fadeInDown', .5s)
 
         .feature-left
+            animation-delay: .5s
             .font-chars
                 span
-                    transition: background 0.5s ease-in 1s, color 0.5s ease-out 1s
+                    transition: all 0.5s ease 1s
                     color: #ccc
-                em-chars(1, 2, 4, 5, 6, 8, 9)
+                em-chars(2.5, 1, 2, 4, 5, 6, 8, 9)
 
         .arrow
             animation-delay: 1.5s
-            animate('slideInLeft', .5s)
+            animate('rubberBand', .5s)
 
         .feature-right
             animation-delay: 2s
 
             .font-chars
-                background: rgba(#D8D8D8, 0.2)
-                // transition: background 0.5s ease-in 2.5s
-                span
-                    em-char()
-                    transition: background 0.5s ease-in 2.5s, color 0.5s ease-out 2.5s
+                background: #f7f7f7
+                em-chars(2.5, 1,2,3,4,5,6,7)
 
         .font-info
-            animation-delay: 3s
-            animate('slideInUp', .5s)
-
-        .tags
             animation-delay: 3.5s
             animate('slideInUp', .5s)
 
+        .tags
+            animation-delay: 4s
+            animate('slideInUp', .5s)
+
+        .feature-more
+            animation-delay: 4.5s
+            animate('slideInUp', .5s)
 
 .feature-left,
 .feature-right
@@ -199,6 +206,10 @@ em-chars($nums...)
 
 .feature-right
     float: right
+
+    .font-chars
+        span
+            color: #f7f7f7
 
 .font-body
     text-align: left
@@ -231,11 +242,18 @@ em-chars($nums...)
     img
         margin: 0 em(4) em(4) 0
 
+.feature-more
+    absolute: _ 50% em(64) 50%
+    $width = 320
+    width: em($width)
+    margin-left: em($width / -2)
+    text-align: center
+
 .usage
     pre
         width: em(600)
         margin: 0 auto
-        padding: em(16)
+        padding: 1em 1.5em
         text-align: left
         font-family: Consolas, Monaco, 'Andale Mono', monospace
         background: rgba($-page-fill-color, 0.3)
@@ -245,12 +263,10 @@ em-chars($nums...)
     em
         font-style: normal
     i
-        color: $-page-fill-color
+        color: #94764A
     em
         background: rgba($-page-fill-color, 0.5)
         padding: em(2) em(4)
-
-
 
 .app
     img

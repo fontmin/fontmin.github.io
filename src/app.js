@@ -23,11 +23,11 @@ define(function (require) {
 
             $btn
                 .attr('href', $link.attr('href'))
-                .text($btn.text().replace('Windows', 'OSX'));
+                .text($btn.text().replace('Windows', 'OS X'));
 
             $link
                 .attr('href', btnUrl)
-                .text($link.text().replace('OSX', 'Windows'));
+                .text($link.text().replace('OS X', 'Windows'));
         }
     }
 

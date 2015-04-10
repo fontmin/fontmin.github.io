@@ -11,15 +11,26 @@ define(function (require) {
 
     var isMac = /Mac OS X/.test(navigator.userAgent);
 
+    var ua = navigator.userAgent;
+
+    var isWin64 = (ua.indexOf('WOW64') !== -1 || ua.indexOf('Win64') !== -1);
+
     /**
      * 下载链接
      */
     function setDownLoad() {
-        if (isMac) {
-            var $btn = $('.down-btn');
-            var $link = $('.down-link');
 
-            var btnUrl = $btn.attr('href');
+        var $btn = $('.down-btn');
+        var $link = $('.down-link');
+        var btnUrl = $btn.attr('href');
+
+        if (isWin64) {
+
+            $btn.attr('href', btnUrl.replace('win32', 'win64'));
+
+        }
+
+        if (isMac) {
 
             $btn
                 .attr('href', $link.attr('href'))

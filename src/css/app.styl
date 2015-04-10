@@ -271,7 +271,10 @@ em-chars($delay, $nums...)
 .app
     img
         display: block
-        margin: em(32) auto
+        margin: em(32) auto 0
+
+    .links
+        margin: 0
 
     .down-btn
         display: inline-block
@@ -289,10 +292,15 @@ em-chars($delay, $nums...)
 .thanks,
 .links,
 .copyright
-    color: #AAAAAA
     margin: em(16) 0
 
 .star
-    margin: em(64) 0 em(32) 0
+    margin: em(64) 0 em(48) 0
     .star-btn
-        vertical-align: middle
+        vertical-align: bottom
+
+.thanks,
+.links,
+.copyright
+    color: #AAAAAA
+    font-size: em(14)

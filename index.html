@@ -9,6 +9,18 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="bookmark" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/app.css">
+    <script>
+        (function(supports) {
+            var lang = (navigator.language || navigator.browserLanguage).toLowerCase().substr(0, 2);
+            var jump = supports[lang];
+            if (jump) {
+                location.href = jump;
+            }
+        }({
+            'jp': '/jp.html',
+            'kr': '/kr.html'
+        }));
+    </script>
     <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-4/esl.js"></script>
     <script>
     require.config({

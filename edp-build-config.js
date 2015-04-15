@@ -110,6 +110,18 @@ exports.getProcessors = function () {
         files: [ 'SourceHanSansSC-Light.ttf' ]
     });
 
+    var krFontProcessor = new FontProcessor({
+        name: 'KrFontProcessor',
+        entryFiles: [ 'kr.html' ],
+        files: [ 'SourceHanSansK-Light.ttf' ]
+    });
+
+    var jpFontProcessor = new FontProcessor({
+        name: 'JpFontProcessor',
+        entryFiles: [ 'jp.html' ],
+        files: [ 'SourceHanSans-Light.ttf' ]
+    });
+
     var logoFontProcessor = new FontProcessor({
         name: 'LogoFontProcessor',
         entryFiles: [],
@@ -136,6 +148,8 @@ exports.getProcessors = function () {
         ]),
         new ParallelProcessor([
             baseFontProcessor,
+            krFontProcessor,
+            jpFontProcessor,
             logoFontProcessor,
             daoFontProcessor
         ])

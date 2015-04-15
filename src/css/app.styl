@@ -6,11 +6,16 @@
 $-page-main-color = #3C5098
 $-page-fill-color = #E4CAA3
 
-$-base-font-family = SourceHanSanSC-Light, $-base-font-family
+$-lang-font-family ?= SourceHanSansSC-Light
+$-base-font-family = $-lang-font-family, $-base-font-family
 
 font-face('SentyBrush', '../font/SentyBrush')
 font-face('SentyWEN1215', '../font/SentyWEN1215')
-font-face('SourceHanSanSC-Light', '../font/SourceHanSansSC-Light')
+
+font-lang-face($lang)
+    font-face(s('%s', $lang), s('../font/%s', $lang))
+
+font-lang-face($-lang-font-family)
 
 html,
 body

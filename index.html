@@ -3,22 +3,27 @@
 <head>
     <meta charset="utf-8">
     <title>Fontmin - 字体子集化方案</title>
-    <meta name="keywords" content="字体, font, typeface, 字集, JavaScript, webfont">
+    <meta name="keywords" content="字体, font, typeface, 子集, JavaScript, webfont">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="bookmark" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/app.css">
     <script>
         (function(supports) {
-            var lang = (navigator.language || navigator.browserLanguage).toLowerCase().substr(0, 2);
+            var language = (navigator.language || navigator.browserLanguage).toLowerCase();
+            var lang = language.substr(0, 2);
+            if (lang === 'zh') {
+                lang = language.substr(-2);
+            }
             var jump = supports[lang];
             if (jump) {
                 location.href = jump;
             }
         }({
             'jp': '/jp.html',
-            'kr': '/kr.html'
+            'kr': '/kr.html',
+            'tw': '/tw.html'
         }));
     </script>
     <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-4/esl.js"></script>
@@ -125,7 +130,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .src('fonts/*.ttf')
-    .dest('build/fonts')
+    .dest('build/fonts');
 
 fontmin.run(function (err, files) {
     if (err) {
@@ -207,14 +212,6 @@ fontmin.run(function (err, files) {
         app.init();
     });
 </script>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?857ec3bab739a39e974d1c280b728595";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+<!--@tongji-->
 </body>
 </html>

@@ -5,9 +5,9 @@
     <title>Fontmin - 字体子集化方案</title>
     <meta name="keywords" content="字体, font, typeface, 字集, JavaScript, webfont">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="bookmark" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="bookmark" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/app-jp.css">
     <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-4/esl.js"></script>
     <script>
@@ -113,7 +113,7 @@ var Fontmin = require('fontmin');
 
 var fontmin = new Fontmin()
     .src('fonts/*.ttf')
-    .dest('build/fonts')
+    .dest('build/fonts');
 
 fontmin.run(function (err, files) {
     if (err) {
@@ -195,14 +195,6 @@ fontmin.run(function (err, files) {
         app.init();
     });
 </script>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?857ec3bab739a39e974d1c280b728595";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+<!--@tongji-->
 </body>
 </html>

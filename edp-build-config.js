@@ -5,6 +5,7 @@
 
 var cwd = process.cwd();
 var path = require('path');
+var fs = require('fs');
 
 // 引入 rider 支持
 var epr = require('./edp-rider-config');
@@ -64,7 +65,8 @@ exports.exclude = [
     '.DS_Store',
     '*.tmp',
     '*.bak',
-    '*.swp'
+    '*.swp',
+    '*.tpl'
 ];
 
 var FontProcessor = require('edp-build-fontmin');
@@ -110,6 +112,12 @@ exports.getProcessors = function () {
         files: [ 'SourceHanSansSC-Light.ttf' ]
     });
 
+    var twFontProcessor = new FontProcessor({
+        name: 'TwFontProcessor',
+        entryFiles: [ 'tw.html' ],
+        files: [ 'SourceHanSansTC-Light.ttf' ]
+    });
+
     var krFontProcessor = new FontProcessor({
         name: 'KrFontProcessor',
         entryFiles: [ 'kr.html' ],
@@ -136,9 +144,26 @@ exports.getProcessors = function () {
         text: '道可道，非常道。名可名，非常名。'
     });
 
+    var tongjiReplacer = {
+        files: ['*.html'],
+        from: '<!--@tongji-->',
+        to: fs.readFileSync(path.resolve(cwd, 'tongji.tpl')),
+        name: 'TongjiReplacer',
+        process: function(file, processContext, callback) {
+            if (this.from && this.to) {
+                file.setData(
+                    file.data.replace(this.from, this.to)
+                );
+            }
+
+            callback();
+        }
+    };
+
     return [
         stylusProcessor,
         cssProcessor,
+        tongjiReplacer,
         moduleProcessor,
         jsProcessor,
         pathMapperProcessor,
@@ -148,8 +173,9 @@ exports.getProcessors = function () {
         ]),
         new ParallelProcessor([
             baseFontProcessor,
-            krFontProcessor,
-            jpFontProcessor,
+            // twFontProcessor,
+            // krFontProcessor,
+            // jpFontProcessor,
             logoFontProcessor,
             daoFontProcessor
         ])

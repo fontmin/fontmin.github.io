@@ -173,8 +173,8 @@ exports.getProcessors = function () {
         ]),
         new ParallelProcessor([
             baseFontProcessor,
-            // twFontProcessor,
-            // krFontProcessor,
+            twFontProcessor,
+            krFontProcessor,
             // jpFontProcessor,
             logoFontProcessor,
             daoFontProcessor

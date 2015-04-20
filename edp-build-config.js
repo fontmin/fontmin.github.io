@@ -96,7 +96,7 @@ exports.getProcessors = function () {
     });
 
     var stylusProcessor = new StylusCompiler({
-        files: ['src/css/app.styl'],
+        files: ['src/css/app*.styl'],
         stylus: epr.stylus,
         compileOptions: {
             use: epr.stylusPlugin
@@ -106,9 +106,22 @@ exports.getProcessors = function () {
     var addCopyright = new AddCopyright();
     var outputCleaner = new OutputCleaner();
 
+    function range(min, max) {
+        var arr = [];
+        for (var i = min, l = max + 1; i < l; i++) {
+            arr.push(i);
+        }
+        return arr;
+    }
+
+    var EnChars = ''
+        + String.fromCharCode.apply(this, range(65, 90))
+        + String.fromCharCode.apply(this, range(97, 122));
+
     var baseFontProcessor = new FontProcessor({
         name: 'BaseFontProcessor',
         entryFiles: [ 'index.html' ],
+        text: EnChars,
         files: [ 'SourceHanSansSC-Light.ttf' ]
     });
 

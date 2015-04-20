@@ -188,7 +188,7 @@ exports.getProcessors = function () {
             baseFontProcessor,
             twFontProcessor,
             krFontProcessor,
-            // jpFontProcessor,
+            jpFontProcessor,
             logoFontProcessor,
             daoFontProcessor
         ])

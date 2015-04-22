@@ -17,14 +17,14 @@
       "theme": "spa"
     }
   },
-  "dependencies": {
-    "edp-build-fontmin": "^1.0.1",
-    "edp-build-parallel": "^1.0.0",
-    "edp-provider-rider": "^0.4.5",
-    "rider-ui": "^0.1.2"
-  },
   "author": "junmer",
   "repository": "empty",
   "license": "BSD",
-  "readme": "README.md"
+  "readme": "README.md",
+  "devDependencies": {
+    "edp-build-fontmin": "^1.0.2",
+    "edp-build-parallel": "^1.0.2",
+    "edp-provider-rider": "^0.4.5",
+    "rider-ui": "^0.1.2"
+  }
 }

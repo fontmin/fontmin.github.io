@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fontmin log</title>
+    <script>
+
+        !function () {
+
+            var log = function(a, e) {
+                var r = null
+                  , f = new Image
+                  , d = '_log_' + Math.floor(2147483648 * Math.random()).toString(36);
+                window[d] = f;
+                f.onload = f.onerror = f.onabort = function() {
+                    f.onload = f.onerror = f.onabort = r;
+                    f = window[d] = r;
+                    e && e(a)
+                };
+                f.src = a
+            };
+
+            var queryStr = location.search.substring(1);
+            var queryArr = queryStr.split('&');
+            var oneQueryStr;
+            var queryMap = {};
+
+            function decodeSafe (str) {
+                var decodedStr
+                try {
+                    decodedStr = decodeURIComponent(str);
+                }
+                catch(e) {
+                    decodedStr = str;
+                }
+
+                return decodedStr;
+            }
+
+            for (var i in queryArr) {
+                oneQueryStr = queryArr[i].split('=');
+                queryMap[oneQueryStr[0]] = decodeSafe(oneQueryStr[1]);
+            }
+
+            queryMap.u && log(queryMap.u);
+
+        }();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
